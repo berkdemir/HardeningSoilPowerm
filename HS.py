@@ -140,4 +140,3 @@ fig.tight_layout()
 
 with columns[2]:
     st.pyplot(fig)
-    st.write(E50_load[0])
