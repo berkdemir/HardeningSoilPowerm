@@ -36,7 +36,7 @@ with columns[0]:
         "Pressure on Foundation (kPa)", min_value=0, max_value=500, step=10, value=100
     )
     UW = st.slider(
-        "Unit Weight of Soil (kN/m3)", min_value=5, max_value=25, step=1, value=20
+        "Unit Weight of Soil (kN/m3)", min_value=0, max_value=25, step=1, value=20
     )
     K0 = st.slider(
         "Coefficient of Lateral Earth Pressure",
