@@ -47,7 +47,7 @@ with columns[0]:
     )
 
 with columns[1]:
-    m = st.slider("Power m", min_value=0.0, max_value=1.0, step=0.01, value=0.5)
+    m = st.slider("Power m", min_value=0.0, max_value=1.0, step=0.01, value=0.55)
     pref = st.slider(
         "Reference Pressure, pref (kPa)",
         min_value=10,
@@ -125,13 +125,14 @@ ax[0].legend(fontsize=8)
 ax[0].set_title("Pressure Difference with Depth (Boussinesq)")
 
 ax[1].plot(E50_load, depth, label="m = " + str(round(m, 2)), color="red")
-ax[1].plot(E50_load_m0, depth, label="m = 0", color="red", lw=0.5, ls="--")
+ax[1].plot(E50_load_m0, depth, label="m = 0", color="red", lw=1, ls="--")
 ax[1].plot(E50_load_m05, depth, label="m = 0.5", color="green", lw=0.5, ls="--")
-ax[1].plot(E50_load_m1, depth, label="m = 1", color="gray", lw=0.5, ls="--")
+ax[1].plot(E50_load_m1, depth, label="m = 1", color="gray", lw=1, ls="--")
 
 ax[1].set_xlabel("E50 (MPa)")
 ax[1].legend(fontsize=8)
 ax[1].set_title("E50 with Depth")
+ax[1].fill_betweenx(depth, E50_load_m1, E50_load_m0, color="gray", alpha=0.1)
 
 fig.suptitle("Effect of Load and Power m on E50", fontsize=16)
 fig.tight_layout()
