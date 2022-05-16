@@ -33,7 +33,7 @@ with columns[0]:
         "Length of Foundation (m)", min_value=1, max_value=100, step=1, value=40
     )
     q = st.slider(
-        "Pressure on Foundation (kPa)", min_value=10, max_value=500, step=10, value=100
+        "Pressure on Foundation (kPa)", min_value=0, max_value=500, step=10, value=100
     )
     UW = st.slider(
         "Unit Weight of Soil (kN/m3)", min_value=5, max_value=25, step=1, value=20
@@ -109,8 +109,6 @@ E50_load_m05 = list()
 E50_load_m1 = list()
 for i in depth:
     qred.append(boussinesq(L, B, i, q) + UW * i)
-    qred_noload.append(UW * i)
-    E50_noload.append(Ecalc(E50ref, UW * i, K0, m, pref, c, phi))
     E50_load.append(Ecalc(E50ref, qred[-1], K0, m, pref, c, phi))
     E50_load_m0.append(Ecalc(E50ref, qred[-1], K0, 0, pref, c, phi))
     E50_load_m05.append(Ecalc(E50ref, qred[-1], K0, 0.5, pref, c, phi))
@@ -119,16 +117,14 @@ for i in depth:
 
 
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 6), sharey=True)
-ax[0].plot(qred_noload, depth, label="No Load | Soil Self-Weight")
-ax[0].plot(qred, depth, label="Load + Soil Self-Weight")
+ax[0].plot(qred, depth, label="Pressure with Depth", color="red")
 ax[0].set_xlabel("Pressure (kPa)")
 ax[0].set_ylabel("Depth (m)")
 ax[0].invert_yaxis()
 ax[0].legend(fontsize=8)
 ax[0].set_title("Pressure Difference with Depth (Boussinesq)")
 
-ax[1].plot(E50_noload, depth, label="m = " + str(round(m, 2)) + " | No Load")
-ax[1].plot(E50_load, depth, label="m = " + str(round(m, 2)))
+ax[1].plot(E50_load, depth, label="m = " + str(round(m, 2)), color="red")
 ax[1].plot(E50_load_m0, depth, label="m = 0", color="red", lw=0.5, ls="--")
 ax[1].plot(E50_load_m05, depth, label="m = 0.5", color="green", lw=0.5, ls="--")
 ax[1].plot(E50_load_m1, depth, label="m = 1", color="gray", lw=0.5, ls="--")
