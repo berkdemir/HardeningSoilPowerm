@@ -17,8 +17,14 @@ BD_im = Image.open("images/BDTunnelTools.png")
 sb.image(BD_im)
 
 with sb:
-    st.caption(
+    max_depth = st.slider(
+        "Maximum depth for figure (m)", min_value=10, max_value=100, value=20
+    )
+    st.write(
         "You can find more on the theory of Hardening Soil in [the blog post here.](https://berkdemir.github.io/2021/05/11/Hardening-Soil-Model/)"
+    )
+    st.caption(
+        "The calculations using Boussinesq are performed for vertical stress only. Horizontal stress is calculated by multiplying it with K0 instead of using Boussinesq directly."
     )
 
 
@@ -61,10 +67,6 @@ with columns[1]:
         "Angle of Friction (deg)", min_value=0, max_value=45, step=1, value=30
     )
 col2 = st.columns([2, 3])
-with col2[-1]:
-    max_depth = st.slider(
-        "Maximum depth for figure (m)", min_value=10, max_value=100, value=20
-    )
 
 
 def boussinesq(L, B, z, q):
