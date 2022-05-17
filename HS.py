@@ -20,7 +20,7 @@ with sb:
     max_depth = st.slider(
         "Maximum depth for figure (m)", min_value=10, max_value=100, value=20
     )
-    st.write(
+    st.markdown(
         "You can find more on the theory of Hardening Soil in [the blog post here.](https://berkdemir.github.io/2021/05/11/Hardening-Soil-Model/)"
     )
     st.caption(
@@ -28,7 +28,7 @@ with sb:
     )
 
 
-st.header("Hardening Soil Model | Effect of Power m")
+st.title("Hardening Soil Model | Effect of Power m")
 
 columns = st.columns([1, 1, 3])
 with columns[0]:
